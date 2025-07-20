@@ -55,6 +55,13 @@ export default function MusicPlayer({ songs, onTimeUpdate }: MusicPlayerProps) {
     }
   }, [currentSong])
 
+  useEffect(() => {
+    const audio = audioRef.current
+    if (audio) {
+      audio.volume = volume / 100
+    }
+  }, [volume])
+
   const togglePlay = () => {
     const audio = audioRef.current
     if (!audio) return
@@ -125,7 +132,7 @@ export default function MusicPlayer({ songs, onTimeUpdate }: MusicPlayerProps) {
 
   return (
     <>
-      <audio ref={audioRef} src={currentSongData?.url} volume={volume / 100} />
+      <audio ref={audioRef} src={currentSongData?.url} />
 
       <div
         ref={playerRef}
